@@ -25,5 +25,6 @@ public interface RequestsService {
 //	String addRequestwith(int id, RequestForm beneficiary);
 	RequestForm setApproved(int id);
 	RequestForm setRejected(int id);
+	public List<RequestForm> myApprovals(int id);
 	
 }

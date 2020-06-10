@@ -22,6 +22,7 @@ import com.luv2code.springboot.cruddemo.entity.RequestForm;
 import com.luv2code.springboot.cruddemo.entity.UsersInfo;
 import com.luv2code.springboot.cruddemo.exceptions.AssetNotFoundException;
 import com.luv2code.springboot.cruddemo.exceptions.RequestNotFoundException;
+import com.luv2code.springboot.cruddemo.exceptions.UserNotFoundException;
 import com.luv2code.springboot.cruddemo.response.Response;
 import com.luv2code.springboot.cruddemo.service.RequestsService;
 import com.luv2code.springboot.cruddemo.service.UsersService;
@@ -40,28 +41,7 @@ public class RequestsRestController {
 		this.requestsService = theRequestsService;
 	}
 	
-	
-//	@GetMapping("/requests")
-//	public Response<List<RequestForm>> findAll() throws RequestNotFoundException {
-//		List<RequestForm> requests =  requestsService.findAll();
-//		if (requests != null) {
-//			return new Response<>(false, "records found", requests);
-//		} else {
-//			throw new RequestNotFoundException();
-//		}
-//	}
-//	
-	// add mapping for GET /Assets/{assetId}
-//	@GetMapping("/requests/{requestId}")
-//	public Response<RequestForm> getRequestForm(@PathVariable int requestId) throws RequestNotFoundException  {
-//		RequestForm theRequestForm = requestsService.findById(requestId);
-//		
-//		if (theRequestForm != null) {
-//			return new Response<>(false, "records found", theRequestForm);
-//		} else {
-//			throw new RequestNotFoundException();
-//		}
-//	}
+
 	@GetMapping("/approvedrequests")
 	public Response<List<RequestForm>> getAllApproved() throws RequestNotFoundException  {
 		List<RequestForm> theRequestForm = requestsService.getApproval();
@@ -74,17 +54,7 @@ public class RequestsRestController {
 		}
 	}
 	
-//	@PutMapping("/approverequest")
-//	public Response<RequestForm> approveRequest(@PathVariable int id,@RequestBody RequestForm theRequestForm) {
-//		requestsService.save(theRequestForm);
-//		if (theRequestForm != null) {
-//
-//			return new Response<>(false, "successfully saved", theRequestForm);
-//
-//		} else {
-//			return new Response<>(true, "save failed", null);
-//		}
-//	}
+
 	
 	//Approvals
 	@PutMapping("/applicationapprove/{appId}")
@@ -107,7 +77,16 @@ public class RequestsRestController {
 		}
 	}
 	
-	
+	@GetMapping("/myapprovals/{id}")
+	public Response<List<RequestForm>> myApprovals(@PathVariable int id) throws UserNotFoundException {
+
+		List<RequestForm> myRequests= requestsService.myApprovals(id);
+		if (myRequests != null) {
+			return new Response<>(false, "records found", myRequests);
+		} else {
+			throw new UserNotFoundException();
+		}
+	}
 	//
 	@GetMapping("/requests")
 	public Response<List<RequestForm>> getAllRejected() throws RequestNotFoundException  {

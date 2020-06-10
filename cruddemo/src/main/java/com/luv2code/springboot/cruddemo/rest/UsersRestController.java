@@ -100,16 +100,16 @@ public class UsersRestController {
 	}
 	
 	//Approval for Managers
-	@GetMapping("/myapprovals/{id}")
-	public Response<List<RequestForm>> myApprovals(@PathVariable int id) throws UserNotFoundException {
-
-		List<RequestForm> myRequests= usersService.myApprovals(id);
-		if (myRequests != null) {
-			return new Response<>(false, "records found", myRequests);
-		} else {
-			throw new UserNotFoundException();
-		}
-	}
+//	@GetMapping("/myapprovals/{id}")
+//	public Response<List<RequestForm>> myApprovals(@PathVariable int id) throws UserNotFoundException {
+//
+//		List<RequestForm> myRequests= usersService.myApprovals(id);
+//		if (myRequests != null) {
+//			return new Response<>(false, "records found", myRequests);
+//		} else {
+//			throw new UserNotFoundException();
+//		}
+//	}
 	
 	//expose "/Assets" and return the list
 	@GetMapping("/users")

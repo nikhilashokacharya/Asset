@@ -100,24 +100,17 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public List<RequestForm> myApprovals(int id) {
 		UsersInfo customer = usersRepository.findById(id).get();
-		customer.requestInfoBeanList1=requestsRepository.findAllApproved();
-		List<RequestForm> requestForm = customer.getRequestInfoBeanList1();
-//		for (RequestForm requestForm2 : requestForm) {
-//			if(requestForm2.isAlloted()) {
-//				requestForm3.add(requestForm2);
-//			} else {
-//				return null;
-//			}
-//		}
-//		return requestForm3;
-////		customer.getRequestInfoBeanList1().
-////		if (customer != null) {
-////			 {
-////			return customer.getRequestInfoBeanList1();
-////			}
-////		}
+		List<RequestForm> requestForm = requestsRepository.findAllApproved();
+        
+for (RequestForm requestForm2 : requestForm) {
+	if(requestForm2.getUserbean().getUserID()==id)
+	{
+		customer.requestInfoBeanList1.add(requestForm2);
+	}
+}
+		
 //		
-		if (customer != null) {
+		if (customer.requestInfoBeanList1!= null) {
 			return customer.getRequestInfoBeanList1();
 		}
 		return null;

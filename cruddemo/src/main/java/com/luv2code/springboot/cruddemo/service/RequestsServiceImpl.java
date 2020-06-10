@@ -121,6 +121,24 @@ public class RequestsServiceImpl implements RequestsService {
 		}
 		return message;
 	}
+	@Override
+	public List<RequestForm> myApprovals(int id) {
+		UsersInfo customer = usersRepository.findById(id).get();
+//		List<RequestForm> requestForm = requestsRepository.findAllApproved();
+        
+//for (RequestForm requestForm2 : requestForm) {
+//	if(requestForm2.getUserbean().getUserID()==id)
+//	{
+//		customer.requestInfoBeanList1.add(requestForm2);
+//	}
+//}
+		
+//		
+		if (customer.requestInfoBeanList1!= null) {
+			return customer.getRequestInfoBeanList1();
+		}
+		return null;
+	}
 	
 }
 				
